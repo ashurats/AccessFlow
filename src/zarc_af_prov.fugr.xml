@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>AccessFlow: SAP role provisioning</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZARC_AF_PROVF01</SOBJ_NAME>
+    <SOBJ_NAME>LZARC_AF_PROVTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZARC_AF_PROV</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>Z_ARC_AF_PROVISION</FUNCNAME>
+     <SHORT_TEXT>AccessFlow: execute approved role assignment</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_REQ_ID</PARAMETER>
+       <TYP>ZARC_AF_REQ_ID</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_CASE_STATUS</PARAMETER>
+       <TYP>ZARC_AF_STATUS</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_REJECTED</PARAMETER>
+       <TYP>ABAP_BOOL</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>ET_ITEMS</PARAMETER>
+       <DBSTRUCT>ZARC_AF_JOINER</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_REQ_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Case number</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_CASE_STATUS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Provisioning case status</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Case message / rejection reason</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_REJECTED</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>X = rejected, nothing processed</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_ITEMS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Work-order items after the run</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
