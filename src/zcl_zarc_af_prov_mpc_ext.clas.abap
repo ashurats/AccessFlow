@@ -1,0 +1,18 @@
+CLASS zcl_zarc_af_prov_mpc_ext DEFINITION
+  PUBLIC
+  INHERITING FROM zcl_zarc_af_prov_mpc
+  CREATE PUBLIC.
+
+  PUBLIC SECTION.
+
+  PROTECTED SECTION.
+
+  PRIVATE SECTION.
+
+ENDCLASS.
+
+
+
+CLASS zcl_zarc_af_prov_mpc_ext IMPLEMENTATION.
+
+ENDCLASS.

@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ZARC_AF_PROV_MPC</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>AccessFlow provisioning - OData model provider</DESCRIPT>
+    <DESCRIPT>Model provider - ZARC_AF_PROV</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>
