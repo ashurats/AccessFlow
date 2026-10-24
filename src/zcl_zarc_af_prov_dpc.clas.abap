@@ -46,6 +46,21 @@ CLASS zcl_zarc_af_prov_dpc DEFINITION
         /iwbep/cx_mgw_busi_exception
         /iwbep/cx_mgw_tech_exception.
 
+    METHODS requestset_get_entity
+      IMPORTING
+        !iv_entity_name          TYPE string
+        !iv_entity_set_name      TYPE string
+        !iv_source_name          TYPE string
+        !it_key_tab              TYPE /iwbep/t_mgw_name_value_pair
+        !it_navigation_path      TYPE /iwbep/t_mgw_navigation_path
+        !io_tech_request_context TYPE REF TO /iwbep/if_mgw_req_entity OPTIONAL
+      EXPORTING
+        !er_entity               TYPE zcl_zarc_af_prov_mpc=>ts_request
+        !es_response_context     TYPE /iwbep/if_mgw_appl_srv_runtime=>ty_s_mgw_response_entity_cntxt
+      RAISING
+        /iwbep/cx_mgw_busi_exception
+        /iwbep/cx_mgw_tech_exception.
+
   PRIVATE SECTION.
 
 ENDCLASS.
@@ -111,6 +126,7 @@ CLASS zcl_zarc_af_prov_dpc IMPLEMENTATION.
   METHOD /iwbep/if_mgw_appl_srv_runtime~get_entity.
 
     DATA: ls_joineritem     TYPE zcl_zarc_af_prov_mpc=>ts_joineritem,
+          ls_request        TYPE zcl_zarc_af_prov_mpc=>ts_request,
           lv_entityset_name TYPE string.
 
     lv_entityset_name = io_tech_request_context->get_entity_set_name( ).
@@ -132,6 +148,26 @@ CLASS zcl_zarc_af_prov_dpc IMPLEMENTATION.
 
         IF ls_joineritem IS NOT INITIAL.
           copy_data_to_ref( EXPORTING is_data = ls_joineritem
+                            CHANGING  cr_data = er_entity ).
+        ELSE.
+          CLEAR er_entity.
+        ENDIF.
+
+      WHEN 'RequestSet'.
+        requestset_get_entity(
+          EXPORTING
+            iv_entity_name          = iv_entity_name
+            iv_entity_set_name      = iv_entity_set_name
+            iv_source_name          = iv_source_name
+            it_key_tab              = it_key_tab
+            it_navigation_path      = it_navigation_path
+            io_tech_request_context = io_tech_request_context
+          IMPORTING
+            er_entity               = ls_request
+            es_response_context     = es_response_context ).
+
+        IF ls_request IS NOT INITIAL.
+          copy_data_to_ref( EXPORTING is_data = ls_request
                             CHANGING  cr_data = er_entity ).
         ELSE.
           CLEAR er_entity.
@@ -171,6 +207,16 @@ CLASS zcl_zarc_af_prov_dpc IMPLEMENTATION.
       EXPORTING
         textid = /iwbep/cx_mgw_not_impl_exc=>method_not_implemented
         method = 'JOINERITEMSET_GET_ENTITY'.
+
+  ENDMETHOD.
+
+
+  METHOD requestset_get_entity.
+
+    RAISE EXCEPTION TYPE /iwbep/cx_mgw_not_impl_exc
+      EXPORTING
+        textid = /iwbep/cx_mgw_not_impl_exc=>method_not_implemented
+        method = 'REQUESTSET_GET_ENTITY'.
 
   ENDMETHOD.
 
